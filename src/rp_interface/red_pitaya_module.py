@@ -184,6 +184,9 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
         Reads in a gui config file (that should be generated via _generate_rp_module_gui_config_file and modified
         by user if necessary) and makes a parameter tree
         '''
+        import IPython
+        ip = IPython.instance()
+
         # Get GUI settings file full path (in bitfile directory)
         self.gui_config_directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config')
         if not hasattr(self, 'defaults_file'):
@@ -230,6 +233,7 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
 
         self.win = QtWidgets.QWidget()
         layout = QtWidgets.QGridLayout()
+        print(self.win, layout)
         self.win.setLayout(layout)
 
         layout.addWidget(self.param_tree, 0, 0, 1, 1)
