@@ -1,0 +1,5 @@
+.idea
+/src/rp_interface.egg-info/*
+/build/*
+*.ipynb
+fpga/pt_feedback/tmp
