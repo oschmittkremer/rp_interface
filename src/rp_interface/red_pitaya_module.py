@@ -190,7 +190,7 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
             raise RuntimeError("Can't apply defaults, no defaults_file defined")
 
         gui_config_full_path = os.path.join(self.gui_config_directory, self.gui_config_file)
-        print(gui_config_full_path)
+        print(gui_config_full_path, 'here with the path')
         if not os.path.isfile(gui_config_full_path):
             raise RuntimeError("Can't apply defaults, file {} doesn't exist".format(gui_config_full_path))
 
