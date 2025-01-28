@@ -190,7 +190,7 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
             raise RuntimeError("Can't apply defaults, no defaults_file defined")
 
         gui_config_full_path = os.path.join(self.gui_config_directory, self.gui_config_file)
-        print(gui_config_full_path, 'here with the path')
+
         if not os.path.isfile(gui_config_full_path):
             raise RuntimeError("Can't apply defaults, file {} doesn't exist".format(gui_config_full_path))
 
@@ -200,7 +200,7 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
         with open(gui_config_full_path, 'r') as f:
             config_dict = yaml.load(f, Loader=yaml.FullLoader)
         # my_params = gui_utils.make_gui_item(self, config_dict)
-        print('here before')
+        print('here before', config_dict)
 
         # Top level must be a group, with children
         if 'children' not in config_dict or config_dict['type'] != 'group':
