@@ -146,6 +146,29 @@ class AOMControlModule(RedPitayaModule):
         Called in __init__, but separated out for readability
         '''
         self.input_select_names = {0: 'In 0', 1: 'In 1'}
+
+
+        self._bottom_toogle_parameter = RedPitayaParameter(
+            red_pitaya=self.rp,
+            register=self._bottom_toggle_register,
+            name='Bottom Toggle Value',
+            dtype=DataType.UNSIGNED_INT,
+            in_range=lambda val: (0 <= val <= 1),
+            write_data=lambda val: int(val * 2*13),
+            read_data=lambda reg: reg / (2**13),
+        )
+
+        self._top_toggle_parameter = RedPitayaParameter(
+            red_pitaya=self.rp,
+            register=self._top_toggle_register,
+            name='Top Toggle Value',
+            dtype=DataType.UNSIGNED_INT,
+            in_range=lambda val: (0 <= val <= 1),
+            write_data=lambda val: int(val * 2*13),
+            read_data=lambda reg: reg / (2**13),
+        )
+
+
         self._input_select_parameter = RedPitayaParameter(
             red_pitaya=self.rp,
             register=self._input_select_register,

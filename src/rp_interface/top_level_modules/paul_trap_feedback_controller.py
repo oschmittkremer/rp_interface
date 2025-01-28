@@ -479,8 +479,6 @@ if __name__ == "__main__":
                                       load_bitfile=False,
                                       apply_defaults=True,
                                       make_gui=True)
-
-
     # ptfb.wavegen.frequency = 120e3
     # ptfb.wavegen.amplitude = 0.5
     # ptfb.output0_select = 3  # sum0
