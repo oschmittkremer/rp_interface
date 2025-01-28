@@ -475,10 +475,10 @@ class PaulTrapFeedbackController(RedPitayaTopLevelModule):
 
 
 if __name__ == "__main__":
-    ptfb = PaulTrapFeedbackController('red-pitaya-00.ee.ethz.ch',
+    ptfb = PaulTrapFeedbackController('red-pitaya-21.ee.ethz.ch',
                                       load_bitfile=False,
-                                      apply_defaults=False,
-                                      make_gui=False)
+                                      apply_defaults=True,
+                                      make_gui=True)
 
 
     # ptfb.wavegen.frequency = 120e3
@@ -493,8 +493,8 @@ if __name__ == "__main__":
     # ptfb.sum0.add6 = True
     # ptfb.sum0.add7 = False
 
-    print(ptfb.sum0)
-    print(ptfb)
+#   print(ptfb.sum0)
+#    print(ptfb)
 
     # ptfb.output1_select = 4
     # print(ptfb)

@@ -197,7 +197,7 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
         #
         # Make the pyqtgraph app and load settings
         app = pg.mkQApp(self.__class__.__name__ + ' GUI')
-
+        print('here before')
         with open(gui_config_full_path, 'r') as f:
             config_dict = yaml.load(f, Loader=yaml.FullLoader)
         # my_params = gui_utils.make_gui_item(self, config_dict)
