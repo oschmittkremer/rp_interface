@@ -230,7 +230,6 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
 
         self.win = QtWidgets.QWidget()
         layout = QtWidgets.QGridLayout()
-        print(self.win, layout)
         self.win.setLayout(layout)
 
         layout.addWidget(self.param_tree, 0, 0, 1, 1)
@@ -238,11 +237,11 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
         self.win.show()
 
         # enable ipython QtGui in python if available
-#        try:
-#            from IPython import get_ipython
-#            IPYTHON = get_ipython()
-#           IPYTHON.magic("gui qt")
-#            GUI_INITIALIZED = True
-#        except BaseException as e:
-#            log.warning('Could not enable IPython gui support: %s.' % e)
+        try:
+            from IPython import get_ipython
+            IPYTHON = get_ipython()
+            IPYTHON.magic("gui qt")
+            GUI_INITIALIZED = True
+        except BaseException as e:
+            log.warning('Could not enable IPython gui support: %s.' % e)
 
