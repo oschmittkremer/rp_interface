@@ -184,8 +184,6 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
         Reads in a gui config file (that should be generated via _generate_rp_module_gui_config_file and modified
         by user if necessary) and makes a parameter tree
         '''
-        import IPython
-        ip = IPython.instance()
 
         # Get GUI settings file full path (in bitfile directory)
         self.gui_config_directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config')
@@ -203,7 +201,6 @@ class RedPitayaTopLevelModule(RedPitayaModule, ABC):
         with open(gui_config_full_path, 'r') as f:
             config_dict = yaml.load(f, Loader=yaml.FullLoader)
         # my_params = gui_utils.make_gui_item(self, config_dict)
-        print('here before', config_dict)
 
         # Top level must be a group, with children
         if 'children' not in config_dict or config_dict['type'] != 'group':
