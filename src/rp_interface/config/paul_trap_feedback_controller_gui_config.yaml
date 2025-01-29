@@ -113,6 +113,18 @@ children:
   - name: trap_enable
     path: _trap_enable_parameter.value
     type: bool
+  - name: top_toogle
+    path: _top_toggle_parameter.value
+    type: float
+    units: s
+    siPrefix: true
+    limits: [0, 1]
+  - name: bottom_toogle
+    path: _bottom_toggle_parameter.value
+    type: float
+    units: s
+    siPrefix: true
+    limits: [0, 1]
   - name: trap_toggle_delay
     path: _trap_toggle_delay_parameter.value
     type: float

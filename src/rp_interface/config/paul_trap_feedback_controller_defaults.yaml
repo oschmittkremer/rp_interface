@@ -8,6 +8,8 @@ properties:
 submodules:
   aom_control:
     properties:
+      top_toggle: 1
+      bottom_toggle: 0
       feedback_enable: false
       feedback_gain: 0.01
       feedback_toggle_delay: 0.0
