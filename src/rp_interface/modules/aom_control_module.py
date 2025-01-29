@@ -148,7 +148,7 @@ class AOMControlModule(RedPitayaModule):
         self.input_select_names = {0: 'In 0', 1: 'In 1'}
 
 
-        self._bottom_toogle_parameter = RedPitayaParameter(
+        self._bottom_toggle_parameter = RedPitayaParameter(
             red_pitaya=self.rp,
             register=self._bottom_toggle_register,
             name='Bottom Toggle Value',
