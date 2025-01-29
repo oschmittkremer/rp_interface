@@ -26,6 +26,8 @@ class AOMControlModule(RedPitayaModule):
     _parameters = {
             'input_select': '_input_select_parameter.value',
             'trap_enable': '_trap_enable_parameter.value',
+            'top_toggle': '_top_toggle_parameter.value',
+            'bottom_toggle': '_bottom_toggle_parameter.value',
             'trap_toggle_delay': '_trap_toggle_delay_parameter.value',
             'trap_toggle_time': '_trap_toggle_time_parameter.value',
             'trap_on_value': '_trap_on_value_parameter.value',
@@ -204,16 +206,6 @@ class AOMControlModule(RedPitayaModule):
             read_data=lambda reg: reg / self.fs,
         )
 
-        # self._trap_on_value_parameter = RedPitayaParameter(
-        #     red_pitaya=self.rp,
-        #     register=self._trap_on_value_register,
-        #     name='Trap on value',
-        #     dtype=DataType.SIGNED_INT,
-        #     in_range=lambda val: (0 <= val <= 1),  # This parameter could  go to -1, but the AOM driver can't
-        #     write_data=lambda val: int(val * 2 ** (self._trap_on_value_register.n_bits-1) - 1e-9),
-        #     read_data=lambda reg: reg / 2 ** (self._trap_on_value_register.n_bits-1),
-        # )
-
         self._feedback_enable_parameter = RedPitayaParameter(
             red_pitaya=self.rp,
             register=self._feedback_enable_register,
@@ -254,12 +246,15 @@ class AOMControlModule(RedPitayaModule):
     def __str__(self):
         return ("AOM Control:\n"
                 "  Trap is {trap_enable}\n"
+                "  Bottom toggle is {bottom_toggle} V Top toggle is {top_toggle}\n"
                 "    Trap toggle: {trap_toggle_time}us (delay {trap_delay_time}us)\n"
                 "  Feedback is {feedback_enable}, Input: {in_sel_name}, ({in_sel_no}), Gain: {feedback_gain:.3f}\n"
                 "    Feedback toggle: {feedback_toggle_time}us (delay {feedback_delay_time}us)").format(
             in_sel_name=self.input_select_names[self._input_select_parameter.value],
             in_sel_no=self._input_select_parameter.value,
             trap_enable='ON' if self._trap_enable_parameter.value else 'OFF',
+            top_toggle=self._top_toggle_parameter.value,
+            bottom_toggle=self._bottom_toggle_parameter.value,
             trap_toggle_time=self._trap_toggle_time_parameter.value*1e6,
             trap_delay_time=self._trap_toggle_delay_parameter.value*1e6,
             feedback_enable='ON' if self._feedback_enable_parameter.value else 'OFF',
