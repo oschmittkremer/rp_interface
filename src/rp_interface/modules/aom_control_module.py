@@ -41,13 +41,15 @@ class AOMControlModule(RedPitayaModule):
     def __init__(self,
                  red_pitaya: Union[RedPitaya, str],
                  gpio_write_address: str,
-                 gpio_read_address: str
-                 ):
+                 gpio_read_address: str,
+                 a_calib=1,
+                 b_calib=0):
         super().__init__(red_pitaya=red_pitaya)
 
         self._gpio_write_address = gpio_write_address
         self._gpio_read_address = gpio_read_address
-
+        self.a_calib = a_calib
+        self.b_calib = b_calib
         self.fs = 125e6
 
         self._define_register_locations()
@@ -156,8 +158,8 @@ class AOMControlModule(RedPitayaModule):
             name='Bottom Toggle Value',
             dtype=DataType.UNSIGNED_INT,
             in_range=lambda val: (0 <= val <= 1),
-            write_data=lambda val: int(val * 2**13) if int(val*2**13)<=8191 else 8191,
-            read_data=lambda reg: reg / (2**13),
+            write_data=lambda val: int((self.a_calib*val+self.b_calib) * 2**13) if int((self.a_calib*val+self.b_calib)*2**13)<=8191 else 8191,
+            read_data=lambda reg: (reg / (2**13)-self.b_calib)/self.a_calib,
         )
 
 
@@ -167,8 +169,8 @@ class AOMControlModule(RedPitayaModule):
             name='Top Toggle Value',
             dtype=DataType.UNSIGNED_INT,
             in_range=lambda val: (0 <= val <= 1),
-            write_data=lambda val: int(val * 2**13) if int(val*2**13)<=8191 else 8191,
-            read_data=lambda reg: reg / (2**13),
+            write_data=lambda val: int((self.a_calib*val+self.b_calib) * 2**13) if int((self.a_calib*val+self.b_calib)*2**13)<=8191 else 8191,
+            read_data=lambda reg: (reg / (2**13)-self.b_calib)/self.a_calib,
         )
 
 
