@@ -168,7 +168,7 @@ class AOMControlModule(RedPitayaModule):
             register=self._bottom_toggle_register,
             name='Bottom Toggle Value',
             dtype=DataType.UNSIGNED_INT,
-            in_range=lambda val: (0 <= val <= 1),
+            in_range=lambda val: (-0.01 <= val <= 1),
             write_data=_toggle_values_write,
             read_data=_toggle_values_read
         )
@@ -180,7 +180,7 @@ class AOMControlModule(RedPitayaModule):
             register=self._top_toggle_register,
             name='Top Toggle Value',
             dtype=DataType.UNSIGNED_INT,
-            in_range=lambda val: (0 <= val <= 1),
+            in_range=lambda val: (-0.01 <= val <= 1),
             write_data=_toggle_values_write,
             read_data=_toggle_values_read
         )
