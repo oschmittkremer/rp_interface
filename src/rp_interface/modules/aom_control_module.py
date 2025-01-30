@@ -158,7 +158,7 @@ class AOMControlModule(RedPitayaModule):
             return dig_calib
 
         def _toggle_values_read(val):
-            analog_val = val/(2**13) if val < 8191 else -(2-val/2**13)
+            analog_val = val/(2**13) if val <= 8191 else -(2-val/2**13)
             inv_calib = (analog_val-self.b_calib)/self.a_calib
             return inv_calib
 
@@ -168,7 +168,7 @@ class AOMControlModule(RedPitayaModule):
             register=self._bottom_toggle_register,
             name='Bottom Toggle Value',
             dtype=DataType.UNSIGNED_INT,
-            in_range=lambda val: (-0.01 <= val <= 1),
+            in_range=lambda val: (-1 <= val <= 1),
             write_data=_toggle_values_write,
             read_data=_toggle_values_read
         )
@@ -180,7 +180,7 @@ class AOMControlModule(RedPitayaModule):
             register=self._top_toggle_register,
             name='Top Toggle Value',
             dtype=DataType.UNSIGNED_INT,
-            in_range=lambda val: (-0.01 <= val <= 1),
+            in_range=lambda val: (-1 <= val <= 1),
             write_data=_toggle_values_write,
             read_data=_toggle_values_read
         )
