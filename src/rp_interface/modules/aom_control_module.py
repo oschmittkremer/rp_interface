@@ -153,15 +153,17 @@ class AOMControlModule(RedPitayaModule):
 
 
         def _toggle_values_write(val):
-            calib = self.a_calib*val+self.b_calib
+#            calib = self.a_calib*val+self.b_calib
+            calib = val
             dig_calib = int(calib*2**13) if calib>=0 else int(2**14-calib*2**13)
             return dig_calib
 
         def _toggle_values_read(val):
+#
             analog_val = val/(2**13) if val <= 8191 else -(2-val/2**13)
-            inv_calib = (analog_val-self.b_calib)/self.a_calib
-            return inv_calib
-
+#            inv_calib = (analog_val-self.b_calib)/self.a_calib
+ #           return inv_calib
+            return analog_val
 
         self._bottom_toggle_parameter = RedPitayaParameter(
             red_pitaya=self.rp,
