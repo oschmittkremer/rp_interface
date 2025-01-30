@@ -152,25 +152,37 @@ class AOMControlModule(RedPitayaModule):
         self.input_select_names = {0: 'In 0', 1: 'In 1'}
 
 
+        def _toggle_values_write(val):
+            calib = self.a_calib*val+self.b_calib
+            dig_calib = int(calib*2**13) if calib>=0 else int(2**14-calib*2**13)
+            return dig_calib
+
+        def _toggle_values_read(val):
+            analog_val = val/(2**13) if val < 8191 else 2-val/2**13
+            inv_calib = (analog_val-self.b_calib)/self.a_calib
+            return inv_calib
+
+
         self._bottom_toggle_parameter = RedPitayaParameter(
             red_pitaya=self.rp,
             register=self._bottom_toggle_register,
             name='Bottom Toggle Value',
             dtype=DataType.UNSIGNED_INT,
             in_range=lambda val: (0 <= val <= 1),
-            write_data=lambda val: int((self.a_calib*val+self.b_calib) * 2**13) if int((self.a_calib*val+self.b_calib)*2**13)<=8191 else 8191,
-            read_data=lambda reg: (reg / (2**13)-self.b_calib)/self.a_calib,
+            write_data=_toggle_values_write,
+            read_data=_toggle_values_read
         )
 
-
+        # lambda val: int(() * 2**13) if int((self.a_calib*val+self.b_calib)*2**13)<=8191 else 8191,
+                   
         self._top_toggle_parameter = RedPitayaParameter(
             red_pitaya=self.rp,
             register=self._top_toggle_register,
             name='Top Toggle Value',
             dtype=DataType.UNSIGNED_INT,
             in_range=lambda val: (0 <= val <= 1),
-            write_data=lambda val: int((self.a_calib*val+self.b_calib) * 2**13) if int((self.a_calib*val+self.b_calib)*2**13)<=8191 else 8191,
-            read_data=lambda reg: (reg / (2**13)-self.b_calib)/self.a_calib,
+            write_data=_toggle_values_write,
+            read_data=_toggle_values_read
         )
 
 
