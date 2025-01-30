@@ -158,7 +158,7 @@ class AOMControlModule(RedPitayaModule):
             return dig_calib
 
         def _toggle_values_read(val):
-            analog_val = val/(2**13) if val < 8191 else 2-val/2**13
+            analog_val = val/(2**13) if val < 8191 else -(2-val/2**13)
             inv_calib = (analog_val-self.b_calib)/self.a_calib
             return inv_calib
 
