@@ -116,11 +116,11 @@ children:
   - name: top_toogle
     path: _top_toggle_parameter.value
     type: float
-    limits: [-0.012, 0.999877]
+    limits: [-1, 0.999877]
   - name: bottom_toogle
     path: _bottom_toggle_parameter.value
     type: float
-    limits: [-0.012, 0.999877]
+    limits: [-1, 0.999877]
   - name: trap_toggle_delay
     path: _trap_toggle_delay_parameter.value
     type: float
